@@ -1,0 +1,36 @@
+From 324a8fe904eb87d24dbbde31ce210993080e27a7 Mon Sep 17 00:00:00 2001
+From: James Westman <james@jwestman.net>
+Date: Tue, 1 Aug 2023 17:56:08 -0500
+Subject: [PATCH] WIP: Try to fix #122
+
+---
+ blueprintcompiler/main.py | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/blueprintcompiler/main.py b/blueprintcompiler/main.py
+index 306dd7d8..2c6c5909 100644
+--- a/blueprintcompiler/main.py
++++ b/blueprintcompiler/main.py
+@@ -39,7 +39,6 @@ class BlueprintApp:
+     def main(self):
+         self.parser = argparse.ArgumentParser()
+         self.subparsers = self.parser.add_subparsers(metavar="command")
+-        self.parser.set_defaults(func=self.cmd_help)
+ 
+         compile = self.add_subcommand(
+             "compile", "Compile blueprint files", self.cmd_compile
+@@ -78,7 +77,10 @@ class BlueprintApp:
+ 
+         try:
+             opts = self.parser.parse_args()
+-            opts.func(opts)
++            if "func" in opts:
++                opts.func(opts)
++            else:
++                self.cmd_help(opts)
+         except SystemExit as e:
+             raise e
+         except KeyboardInterrupt:
+-- 
+GitLab
+
