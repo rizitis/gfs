@@ -47,6 +47,13 @@ else
 fi
 }
 
+if [ "$META" != "edit" ] && [ "$META" != "build" ] && [ "$META" != "installpkg" ] && [ "$META" != "prepare" ] && \
+   [ "$META" != "catlog" ] && [ "$META" != "newtemplate" ] && [ "$META" != "makegfspkg" ] && [ "$META" != "gfsversion" ] && \
+   [ "$META" != "gfshelp" ] && [ "$META" != "message" ] && [ "$META" != "gnome" ] && [ "$META" != "gnome-apps" ] && \
+   [ "$META" != "gnome-extra" ] && [ "$META" != "gnome-all" ]; then
+    exit
+fi
+
 if [ $META = gnome ]; then
 source $GFSCWD/gnome.env
  echo "$PKGBUILD"
@@ -138,6 +145,7 @@ fi
 if [ $META = gnome-all ] || [ $META = gnome-extra ] || [ $META = gnome-apps ] || [ $META = gnome ]; then 
 exit 
 fi
+
 
 
 edit() {
